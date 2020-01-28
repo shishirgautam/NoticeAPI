@@ -7,14 +7,17 @@ const app = express();
 
 //Middlewares
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
     //  IMPORTS ROUTES
-const usersRoute = require('./routes/users');
+const usersRoute = require('./routes/auths');
 app.use('/users', usersRoute);
 
 const postsRoute = require('./routes/posts');
 app.use('/posts', postsRoute);
+
+const roleRoute = require('./routes/roles');
+app.use('/roles', roleRoute);
 
 
 
