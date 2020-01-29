@@ -1,15 +1,17 @@
 const jwt = require('jsonwebtoken');
-function auth(req, res, next){
+
+module.exports =  function(req, res, next) {
     const token = req.header('auth-token');
-    if (!token) return res.this.status(401).send('Access Denided');
+    if (!token) return res.this.status(401).send('Access Denied');
 
     try {
         
-        const verified = jwt.verify(token, process.env.SECRET)
+        const verified = jwt.verify(token, process.env.SECRET);
             req.user = verified;
+            next();
 
-    }catch(err){
+    } catch(err) {
         res.status(400).send('invalid token');
     }
 
-}
+};
