@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const {registerValidation} = require('../validation');
-//const {loginValidation} = require('../validation');
+var bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const {registerValidation,loginValidation} = require('../validation');
+//const {} = require('../validation');
 
 
 router.post('/register', async (req, res) => {
@@ -18,7 +19,8 @@ router.post('/register', async (req, res) => {
       if(emailExits) return res.status(400).send('Email is already exits');
   
   //Hash passwords
-  const salt = await bcrypt.getSalt(10);
+
+  const salt = 10;
   const hashPassword = await bcrypt.hash(req.body.password, salt);
 
 
@@ -50,10 +52,16 @@ router.post('/register', async (req, res) => {
   
      // Checking if the emailexits
       const user = await User.findOne({email: req.body.email});
-      if(!user) return res.status(400).send('Email or Password is wrong');
-  });
+      if(!user) return res.status(400).send('Email is not found');
+
 
       //Passsword is correct
+      const validPass = await bcrypt.compare(req.body.password, user.password);
+      if(!validPass)  return res.status(400).send('invalid password');
+
+    //Create and assign a token
+
+      res.send('Logged in');
   
-  
+    });
   module.exports = router;
