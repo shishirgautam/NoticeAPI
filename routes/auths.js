@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
       if(emailExits) return res.status(400).send('Email is already exits');
   
   //Hash passwords
-  const salt = await bcrypt.getSalt(10);
+  const salt = await(10);
   const hashPassword = await bcrypt.hash(req.body.password, salt);
 
 
