@@ -22,6 +22,11 @@ image  :{
     required: true,
     
 }
+
+// role:{
+//     type:mongoose.Schema.Types.ObjectId,
+//     ref:'Roles'
+// }
 // date: {
 //     type: Date,
 //     required: Date.now
