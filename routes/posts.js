@@ -4,7 +4,7 @@ const Post = require('../models/Post');
 const verify = require('./verifyToken');
 
 //GET BACK ALL THE POSTS
-router.get('/', verify, async (req,res) => {
+router.get('/', verify,  async (req,res) => {
     try{
         const posts = await Post.find();
         res.json(posts);
