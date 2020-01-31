@@ -4,7 +4,7 @@ const Post = require('../models/Post');
 const verify = require('./verifyToken');
 
 //GET BACK ALL THE POSTS
-router.get('/', async (req,res) => {
+router.get('/', verify,  async (req,res) => {
     try{
         const posts = await Post.find();
         res.json(posts);
@@ -16,7 +16,7 @@ router.get('/', async (req,res) => {
 });
 
 //SUBMITS A POSTS
-router.post('/', async (req,res) => {
+router.post('/',async (req,res) => {
    const post = new Post({
        title: req.body.title,
        description: req.body.description
