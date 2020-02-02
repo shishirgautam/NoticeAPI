@@ -14,7 +14,10 @@ const usersRoute = require('./routes/auths');
 app.use('/users', usersRoute);
 
 const postsRoute = require('./routes/posts');
-app.use('/posts', postsRoute);
+app.use('/api/web/auth/posts',postsRoute);
+
+const commentRoute = require('./routes/comments');
+app.use('/api/web/auth/comments', commentRoute);
 
 const roleRoute = require('./routes/roles');
 app.use('/roles', roleRoute);

@@ -15,23 +15,25 @@ router.post('/register', async (req, res) => {
 
 
   // Checking if the user is already in the database
-      const emailExits = await User.findOne({email: req.body.email});
-      if(emailExits) return res.status(400).send('Email is already exits');
+      const usernameExits = await User.findOne({username: req.body.username});
+      if(usernameExits) return res.status(400).send('username is already exits');
   
   //Hash passwords
 
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-
-  
-  
   //Create a user
   const user = new User({
       username: req.body.username,
       email: req.body.email,
       password: hashPassword,
-      image: req.body.image
+      image: req.body.image,
+      mobile_number: req.body.mobile_number,
+      temporary_addreess: req.body.temporary_addreess,
+      permanent_address: req.body.permanent_address,
+      update_date: req.body.update_date,
+      role: req.body.role || "5e36505b45195141549ca35b"
   }); 
   try{
          const savedUser = await user.save()
@@ -51,8 +53,8 @@ router.post('/register', async (req, res) => {
       if(error) return res.status(400).send(error.details[0].message);
   
      // Checking if the emailexits
-      const user = await User.findOne({email: req.body.email  });
-      if(!user) return res.status(400).send('Email is not found');
+      const user = await User.findOne({username: req.body.username  });
+      if(!user) return res.status(400).send('username is not found');
 
 
       //Passsword is correct
@@ -63,7 +65,6 @@ router.post('/register', async (req, res) => {
     const token = jwt.sign({_id: user._id}, process.env.SECRET);
     res.header('auth-token', token).send(token);
 
-      res.send('Logged in');
-  
+      res.send('Logged in');  
     });
   module.exports = router;

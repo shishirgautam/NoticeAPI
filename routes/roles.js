@@ -20,8 +20,7 @@ router.get('/', async (req,res) => {
 // });
 router.post('/',async(req, res) => {
     const role = new Role({
-      username: req.body.username,
-       password: req.body.password
+      roles: req.body.roles,
     });
     try{
       const savedRole = await role.save()

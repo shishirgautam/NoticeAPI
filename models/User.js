@@ -17,19 +17,33 @@ password  :{
     required: true,
     min:8
 },
-image  :{
+mobile_number  :{
     type: String,
     required: true,
-    
+    max:10
+},
+temporary_addreess  :{
+    type: String,
+    required: true,
+},
+permanent_address :{
+    type: String,
+    required: true
+},
+image  :{
+    type: String    
+},
+create_date: {
+    type: Date,
+    default: Date.now()
+},
+update_date: {
+    type: Date,
+    required: false
+},
+role:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Roles'
 }
-
-// role:{
-//     type:mongoose.Schema.Types.ObjectId,
-//     ref:'Roles'
-// }
-// date: {
-//     type: Date,
-//     required: Date.now
-// }
 })
 module.exports = mongoose.model('Users',userSchema);
