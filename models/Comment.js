@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 
-const PostSchema = mongoose.Schema({
+const CommentSchema = mongoose.Schema({
     //attributes
-    title: {
+    comments: {
         type: String,
         required: true
     },
-    description: {
-        type: String,
-        required: true
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Users'
+    },
+    postId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Posts'
     },
     create_date: {
         type: Date,
@@ -22,4 +26,4 @@ const PostSchema = mongoose.Schema({
         type: Boolean
     }
     })
-    module.exports = mongoose.model('Posts', PostSchema);
+    module.exports = mongoose.model('Comments', CommentSchema);

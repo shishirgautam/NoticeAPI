@@ -9,14 +9,19 @@ const registerValidation = data =>{
                 .required(),
         email: Joi.string() 
              .min(6) 
-             .required() 
              .email(),
         password: Joi.string() 
                 .min(6) 
                 .required() ,
         image: Joi.string() 
-             .min(6) 
-             .required()
+             .required(false),
+        mobile_number: Joi.string()
+        .required(),
+        temporary_addreess: Joi.string()
+        .required(),
+        permanent_address: Joi.string()
+        .required(),
+        role: Joi.string()
 
    });
    return  Joi.validate(data, schema);
@@ -25,10 +30,9 @@ const registerValidation = data =>{
 const loginValidation = data =>{
     const schema = Joi.object({ 
        
-        email: Joi.string() 
+        username: Joi.string() 
              .min(6) 
-             .required() 
-             .email(),
+             .required(),
         password: Joi.string() 
                 .min(6) 
                 .required() 

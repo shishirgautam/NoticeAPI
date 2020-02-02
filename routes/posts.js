@@ -6,7 +6,9 @@ const verify = require('./verifyToken');
 //GET BACK ALL THE POSTS
 router.get('/', verify,  async (req,res) => {
     try{
-        const posts = await Post.find();
+        var query = { status: true };
+
+        const posts = await Post.find(query);
         res.json(posts);
 
     }catch(err){
@@ -16,10 +18,11 @@ router.get('/', verify,  async (req,res) => {
 });
 
 //SUBMITS A POSTS
-router.post('/',async (req,res) => {
+router.post('/',verify, async (req,res) => {
    const post = new Post({
        title: req.body.title,
-       description: req.body.description
+       description: req.body.description,
+       status: true
    }); 
 try{
 const savedPost = await post.save()
@@ -29,9 +32,10 @@ res.json(savedPost);
 }
 });
 
-//SPECIFIC POST
+//SPECIFIC POST for either status is true or false
 router.get('/:postId', async(req, res) =>{
     try{
+
         const post = await Post.findById(req.params.postId);
         res.json(post);
 
@@ -40,8 +44,19 @@ router.get('/:postId', async(req, res) =>{
     }
 })
 
-//delete post
+//find specific post whose status is true
+router.get('/:postId/active', async(req, res) =>{
+    try{
+        var query = { status: true, _id: req.params.postId };
 
+        const post = await Post.find(query);
+        res.json(post);
+
+    }catch(err){
+        res.json({message: err});
+    }
+})
+//delete post from database
 router.delete('/:postId',async (req,res) => {
     try{
     const removedPost= await Post.remove({_id: req.params.postId});
@@ -51,12 +66,35 @@ router.delete('/:postId',async (req,res) => {
     }
 });
 
+//soft delete 
+router.patch('/:postId/inactive',async(req,res) =>{
+    try{
+        const id = req.params.postId;
+        const updateObject = req.body;
+        updateObject.status= false;
+        updateObject.update_date = Date.now();
+        const updatePost = await Post.update(
+            { _id: id },
+            { $set: updateObject},
+
+        );
+        res.json(updatePost);
+    }catch(err){
+res.json({message: err});
+    }
+})
+
 //Update  a post
 router.patch('/:postId',async(req,res) =>{
     try{
-        const updatePost = await Post.updateOne(
-            { _id: req.params.postId },
-            { $set: { title: req.body.title } }
+        const id = req.params.postId;
+        const updateObject = req.body;
+        updateObject.update_date = Date.now();
+
+        const updatePost = await Post.update(
+            { _id: id },
+            { $set: updateObject},
+
         );
         res.json(updatePost);
     }catch(err){
