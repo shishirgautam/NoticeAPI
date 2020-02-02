@@ -1,5 +1,3 @@
 # NoticeAPI
-1 start server
-
-
-nodemon
+1. start server
+  -nodemon
