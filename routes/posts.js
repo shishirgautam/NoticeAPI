@@ -5,6 +5,7 @@ const verify = require('./verifyToken');
 
 //GET BACK ALL THE POSTS
 router.get('/', verify,  async (req,res) => {
+
     try{
         var query = { status: true };
 
