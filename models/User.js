@@ -22,7 +22,7 @@ mobile_number  :{
     required: true,
     max:10
 },
-temporary_addreess  :{
+temporary_address  :{
     type: String,
     required: true,
 },

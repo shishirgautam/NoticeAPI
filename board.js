@@ -8,20 +8,15 @@ const app = express();
 //Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded());
+// in latest body-parser use like below.
+app.use(bodyParser.urlencoded({ extended: false }));
 
     //  IMPORTS ROUTES
-const usersRoute = require('./routes/auths');
-app.use('/users', usersRoute);
-
-const postsRoute = require('./routes/posts');
-app.use('/api/web/auth/posts',postsRoute);
-
-const commentRoute = require('./routes/comments');
-app.use('/api/web/auth/comments', commentRoute);
-
-const roleRoute = require('./routes/roles');
-app.use('/roles', roleRoute);
-
+app.use('/users', require('./routes/auths'));
+app.use('/api/web/auth/posts',require('./routes/posts'));
+app.use('/api/web/auth/comments', require('./routes/comments'));
+app.use('/roles', require('./routes/roles'));
 
 
 //ROUTES
@@ -30,8 +25,6 @@ res.send('Welcome to home');
 
 });
 
-    
-    
 //connect to db
 mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
     .then((db) => {

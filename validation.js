@@ -17,7 +17,7 @@ const registerValidation = data =>{
              .required(false),
         mobile_number: Joi.string()
         .required(),
-        temporary_addreess: Joi.string()
+        temporary_address: Joi.string()
         .required(),
         permanent_address: Joi.string()
         .required(),
@@ -31,10 +31,8 @@ const loginValidation = data =>{
     const schema = Joi.object({ 
        
         username: Joi.string() 
-             .min(6) 
              .required(),
         password: Joi.string() 
-                .min(6) 
                 .required() 
        
    });
