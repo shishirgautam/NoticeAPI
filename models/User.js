@@ -30,9 +30,9 @@ permanent_address :{
     type: String,
     required: true
 },
-image  :{
-    type: String    
-},
+// image  :{
+//     type: String    
+// },
 create_date: {
     type: Date,
     default: Date.now()
@@ -42,8 +42,8 @@ update_date: {
     required: false
 },
 role:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Roles'
+    type: String,
+    default: 'User'
 }
 })
 module.exports = mongoose.model('Users',userSchema);

@@ -47,10 +47,12 @@ res.json(savedComments);
 }
 });
 
+
+
 //SPECIFIC Comments
 router.get('/:commentId/posts',verify, async(req, res) =>{
     try{
-        const userComments = await Comment.findById(req.params.commentId);
+        const userComments = await Comment.findById(req.params.commentId).sort({'_id': -1});
         res.json(userComments);
 
     }catch(err){

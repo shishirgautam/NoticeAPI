@@ -13,8 +13,8 @@ const registerValidation = data =>{
         password: Joi.string() 
                 .min(6) 
                 .required() ,
-        image: Joi.string() 
-             .required(false),
+     //    image: Joi.string() 
+     //         .required(false),
         mobile_number: Joi.string()
         .required(),
         temporary_address: Joi.string()

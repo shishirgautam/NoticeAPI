@@ -73,12 +73,12 @@ router.post('/register', async (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: hashPassword,
-    image: req.body.image,
+    // image: req.body.image,
     mobile_number: req.body.mobile_number,
     temporary_address: req.body.temporary_address,
     permanent_address: req.body.permanent_address,
     update_date: req.body.update_date,
-    role: req.body.role || "5e36505b45195141549ca35b"
+    role: 'User'
   });
   try {
     const savedUser = await user.save()
@@ -89,7 +89,6 @@ router.post('/register', async (req, res) => {
   }
 
 });
-
 
 //LOGIN
 router.post('/login', async (req, res) => {
