@@ -27,26 +27,6 @@ router.get("/me", require("./verifyToken"),(req,res)=>{
     }).catch((error)=>{
       res.status(400).send(error)
     });
-  // res.json({
-  //   _id: req.User._id,
-  //   Username: req.User.username,
-  //   Email: Request.User,mobile_number
-
-  // })
-  // console.log(req.header['auth-token'])
-  // res.send({User: req.user});
-  // User.find({
-  //   req:User._id
-  // })
-  // .then(userFound  => {
-  //   if (!userFound ){
-  //     console.log(userFound);
-  //     return res.status(404).end();
-  //   }
-  //   // console.log(json(userFound));
-  //   return res.status(200).json(userFound )
-  // })
-  // .catch(err => console.log(err));
   
 });
 
