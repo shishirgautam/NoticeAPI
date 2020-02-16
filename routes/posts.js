@@ -5,11 +5,20 @@ const verify = require('./verifyToken');
 
 //GET BACK ALL THE POSTS
 router.get('/', verify,  async (req,res) => {
-
     try{
         var query = { status: true };
+        const posts = await Post.find(query).populate("postedby");
+        res.json(posts);
 
-        const posts = await Post.find(query);
+    }catch(err){
+        res.json({messag:err});
+    }
+ 
+});
+router.get('/mine', verify,  async (req,res) => {
+    try{
+        var query = {postedby:req.user._id, status: true };
+        const posts = await Post.find(query).populate("postedby");
         res.json(posts);
 
     }catch(err){
@@ -23,10 +32,11 @@ router.post('/',verify, async (req,res) => {
    const post = new Post({
        title: req.body.title,
        description: req.body.description,
+       postedby:req.user._id,
        status: true
    }); 
 try{
-const savedPost = await post.save()
+const savedPost = await (await post.save()).populate("postedby").execPopulate();
 res.json(savedPost);
 }catch(err){
     res.json({message: err});

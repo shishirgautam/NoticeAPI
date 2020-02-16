@@ -17,10 +17,8 @@ const registerValidation = data =>{
              .required(false),
         mobile_number: Joi.string()
         .required(),
-        temporary_address: Joi.string()
-        .required(),
-        permanent_address: Joi.string()
-        .required(),
+        temporary_address: Joi.string(),
+        permanent_address: Joi.string(),
         role: Joi.string()
 
    });
@@ -31,8 +29,10 @@ const loginValidation = data =>{
     const schema = Joi.object({ 
        
         username: Joi.string() 
+             .min(6) 
              .required(),
         password: Joi.string() 
+                .min(6) 
                 .required() 
        
    });

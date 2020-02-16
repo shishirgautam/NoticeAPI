@@ -10,9 +10,6 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    document: {
-        type: String
-    },
     create_date: {
         type: Date,
         default: Date.now()
@@ -20,6 +17,11 @@ const PostSchema = mongoose.Schema({
     update_date: {
         type: Date,
         required: false
+    },
+    postedby:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Users',
+        required: true
     },
     status:{
         type: Boolean

@@ -22,13 +22,11 @@ mobile_number  :{
     required: true,
     max:10
 },
-temporary_address  :{
+temporary_addreess  :{
     type: String,
-    required: true,
 },
 permanent_address :{
     type: String,
-    required: true
 },
 image  :{
     type: String    

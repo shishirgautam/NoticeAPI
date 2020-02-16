@@ -92,7 +92,7 @@ res.json({message: err});
 })
 
 
-//Update  a comment
+//Update  a post
 router.patch('/:post_id/posts/:commentId',async(req,res) =>{
     try{
         const post_id = req.params.post_id;
